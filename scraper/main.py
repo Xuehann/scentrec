@@ -70,7 +70,7 @@ def scrape_perfume_page(perfume_urls):
         if count % 100 == 0:
             log(f"[{count}] Saved: {success}, Skipped: {skipped}, Failed: {failed}")
 
-    log(f"✅ DONE: Total Saved: {success}, Skipped: {skipped}, Failed: {failed}")
+    log(f"DONE: Total Saved: {success}, Skipped: {skipped}, Failed: {failed}")
 
 # ========== GET URL LIST ==========
 def get_url_list(filename):
