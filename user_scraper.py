@@ -37,6 +37,7 @@ def scrape_user_ratings(perfume_ids):
 
         for count, pid in enumerate(perfume_ids):
             response = get_html_comment(pid)
+            time.sleep(random.uniform(4, 8))
             if not response:
                 continue
 
@@ -76,5 +77,5 @@ def get_id_list(filename):
 
 # ========== ENTRY POINT ==========
 if __name__ == '__main__':
-    perfume_ids = get_id_list('data/rated_perfume_id.csv')
+    perfume_ids = get_id_list('rated_perfume_id.csv')
     scrape_user_ratings(perfume_ids)
