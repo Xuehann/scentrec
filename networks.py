@@ -11,7 +11,6 @@ from hyperparameters import Hyperparams as hp
 tool = ToolGeneral()
 jieba.load_userdict(os.path.join(os.path.dirname(os.path.abspath('./scentrec')), 'data','jieba_sentiment.txt'))
 
-
 class SentimentAnalysis():
     """
     Sentiment Analysis with some dictionarys
@@ -100,9 +99,8 @@ class SentimentAnalysis():
                 pos_count = poscount3
                 neg_count = negcount3
                 count1.append([pos_count,neg_count])           
-            if any(w in ['!', '！'] for w in words):
+            if words[-1] in ['!','！']:# 扫描感叹号前的情感词，发现后权值*2
                 count1 = [[j*2 for j in c] for c in count1]
-
     
             for w_im in ['但是','但']:
                 if w_im in words : # 扫描但是后面的情感词，发现后权值*5
@@ -146,7 +144,6 @@ class SentimentAnalysis():
        
     def normalization_score(self,sent):
         score1,score0 = self.sentiment_score(sent)
-        print(f"[调试] 原始正向分数：{score1}, 原始负向分数：{score0}")
         if score1 > 4 and score0 > 4:
             if score1 >= score0:
                 _score1 = 1
@@ -168,5 +165,5 @@ class SentimentAnalysis():
 
 if __name__ =='__main__':
     sa = SentimentAnalysis()
-    text = "我超级喜欢这个产品，非常惊喜，太棒了！真的太喜欢了！！！"
+    text = '我特别喜欢武汉这个城市！因为武汉有非常多好看的景点。但是，我不喜欢武汉的天气，因为武汉的天气有点差，热的时候让人感觉不爽。'
     print(sa.normalization_score(text))
